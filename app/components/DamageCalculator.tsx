@@ -13,33 +13,51 @@ const btnValues = [
   [1, 2, 3],
 ]
 
-class Calculation {
-  constructor(result = 0, previous=0) {
-    this.result = result;
-    this.previous = previous;
+class Inputs {
+  values: number[]
+
+  constructor(values: number[] = []) {
+    this.values = values;
   }
 
   reset() {
-    return new Calculation();
+    return new Inputs();
   }
 
-  add(number) {
-    return new Calculation(
-      this.result + Number(number), 
-      this
-    );
+  add(value: number) {
+    return new Inputs([...this.values, Number(value)])
+  }
+
+  subtract(value: number) {
+    return new Inputs([...this.values, -value]);
   }
 
   undo() {
-    if (this.previous === 0)
-      return this
-    return this.previous;
+    if(this.values.length == 0) {
+      return this;
+    }
+
+    return new Inputs(this.values.slice(0, -1))
   }
 
+  calculate() {
+    if (this.values.length == 0) {
+      return 0;
+    }
+    return this.values.reduce((a,b) => {return a + b;}, 0);
+  }
+
+  history() {
+    if (this.values.length == 0) {
+      return "No Values Entered";
+    }
+    return this.values.join(", ")
+  }
 }
 
+
 function DamageCalculator() {
-  let [calc, setCalc] = useState(new Calculation());
+  let [calc, setCalc] = useState(new Inputs());
 
   const numClickHandler = (e) => {
     e.preventDefault();
@@ -60,7 +78,7 @@ function DamageCalculator() {
 
   return (
     <Wrapper>
-      <Screen value={calc.result} />
+      <Screen value={calc.calculate()} />
       <ButtonBox>
         {
           btnValues.flat().map((btn, i) => {
@@ -72,8 +90,8 @@ function DamageCalculator() {
                   btn === "C"
                     ? resetClickHandler
                     : btn === "⬅️"
-                    ? undoClickHandler
-                    : numClickHandler
+                      ? undoClickHandler
+                      : numClickHandler
                 }
               />
             );
