@@ -79,6 +79,7 @@ function DamageCalculator() {
   return (
     <Wrapper>
       <Screen value={calc.calculate()} />
+      <Screen value={calc.history()} height="20px" />
       <ButtonBox>
         {
           btnValues.flat().map((btn, i) => {

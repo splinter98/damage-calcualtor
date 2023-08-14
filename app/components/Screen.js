@@ -1,11 +1,11 @@
 'use client'
 import Textfit from "@namhong2001/react-textfit"
 import css from 'styled-jsx/css'
-// import './Screen.css'
 
-const { className, styles } = css.resolve`
-  div {
-      height: 100px;
+function getScreenStyle(height) {
+  return css.resolve`
+    div {
+      height: ${height};
       width: 100%;
       margin-bottom: 10px;
       padding: 0 10px;
@@ -14,16 +14,19 @@ const { className, styles } = css.resolve`
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      color: white;
-      font-weight: bold;
-      box-sizing: border-box;
-  }
-`
+        color: white;
+        font-weight: bold;
+        box-sizing: border-box;
+        overflow-x: hidden;
+      }
+      `
+}
+    
 
-
-const Screen = ({ value }) => {
+const Screen = ({ value, height = "100px" }) => {
+  const {className, styles} = getScreenStyle(height);
   return (
-    <Textfit className={className} mode="single" max={70}>
+    <Textfit className={className} mode="single" max="70">
       {value}
       {styles}
     </Textfit>
