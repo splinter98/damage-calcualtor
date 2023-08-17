@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   themeColor: '#000000',
   icons: {
     icon: '/favicon.ico',
-    apple: '/logo192.png'
+    apple: '/apple-touch-icon.png'
   },
   manifest: '/manifest.json'
 }
