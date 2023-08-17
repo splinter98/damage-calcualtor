@@ -1,6 +1,11 @@
 /**
  * @type {import('next').NextConfig}
  */
+
+const withPWA = require('next-pwa')({
+    dest: 'public'
+})
+
 const nextConfig = {
     output: 'export',
     // Optional: Add a trailing slash to all paths `/about` -> `/about/`
@@ -9,4 +14,4 @@ const nextConfig = {
     // distDir: 'dist',
 }
 
-module.exports = nextConfig
+module.exports = withPWA(nextConfig)
