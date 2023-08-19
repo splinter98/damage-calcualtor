@@ -1,15 +1,16 @@
 import { Metadata } from "next"
 import './global.css'
 
+
 export const metadata: Metadata = {
   title: "TTRPG Damage Calculator",
   description: "Simple TTRPG Damage Calculator",
   themeColor: '#000000',
   icons: {
-    icon: '/favicon.ico',
-    apple: '/apple-touch-icon.png'
+    icon: '/damage-calcualtor/favicon.ico',
+    apple: '/damage-calcualtor/apple-touch-icon.png'
   },
-  manifest: '/manifest.json'
+  manifest: '/damage-calcualtor/manifest.json'
 }
 
 export default function RootLayout({
